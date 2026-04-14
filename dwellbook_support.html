@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DwellBook — Support & Privacy</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:       #FAF8F4;
+      --warm:        #F2EDE4;
+      --border:      rgba(60,50,30,0.12);
+      --border-mid:  rgba(60,50,30,0.2);
+      --ink:         #2A2318;
+      --ink-mid:     #6B5F4E;
+      --ink-light:   #A89880;
+      --green:       #2E5439;
+      --green-light: #EAF2EC;
+      --green-mid:   #3B6B4A;
+      --amber:       #C17B2A;
+      --amber-light: #FDF3E3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--cream);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--green);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-name {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--ink-mid);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+
+    /* HERO */
+    .hero {
+      background: var(--green);
+      color: white;
+      padding: 64px 24px 56px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: #FAF8F4;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      max-width: 480px;
+      margin: 0 auto 28px;
+    }
+
+    .hero-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 0.5px solid rgba(255,255,255,0.25);
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #FAF8F4;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .hero-email:hover { background: rgba(255,255,255,0.2); }
+
+    /* MAIN LAYOUT */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 56px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .section h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(22px, 4vw, 28px);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .section p {
+      color: var(--ink-mid);
+      margin-bottom: 16px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item {
+      background: white;
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 18px 20px;
+      text-align: left;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.1s;
+    }
+
+    .faq-q:hover { background: var(--warm); }
+
+    .faq-arrow {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+      font-size: 12px;
+      color: var(--green);
+    }
+
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+    .faq-a {
+      display: none;
+      padding: 0 20px 18px;
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.7;
+      border-top: 0.5px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .faq-item.open .faq-a { display: block; }
+
+    .faq-a strong { color: var(--ink); font-weight: 500; }
+
+    /* CONTACT CARD */
+    .contact-card {
+      background: var(--amber-light);
+      border: 0.5px solid rgba(193,123,42,0.25);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--amber);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 22px;
+    }
+
+    .contact-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .contact-card p {
+      font-size: 14px;
+      color: var(--ink-mid);
+      margin-bottom: 12px;
+    }
+
+    .contact-email-link {
+      display: inline-block;
+      background: var(--amber);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+
+    .contact-email-link:hover { opacity: 0.88; }
+
+    /* PRIVACY */
+    .privacy-block {
+      background: white;
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 36px;
+    }
+
+    .privacy-block h3 {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 24px 0 10px;
+    }
+
+    .privacy-block h3:first-child { margin-top: 0; }
+
+    .privacy-block p {
+      font-size: 14px;
+      color: var(--ink-mid);
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+
+    .privacy-block ul {
+      margin: 0 0 14px 20px;
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.75;
+    }
+
+    .privacy-block li { margin-bottom: 4px; }
+
+    .privacy-highlight {
+      background: var(--green-light);
+      border-left: 3px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: var(--green-mid);
+      font-weight: 500;
+      margin: 16px 0;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--warm);
+      border-top: 0.5px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .footer-meta {
+      font-size: 12px;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+
+    .footer-meta a {
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    .footer-meta a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .contact-card { flex-direction: column; gap: 16px; }
+      .privacy-block { padding: 20px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-icon">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <polygon points="9,2 2,8 16,8" fill="#FAF8F4"/>
+        <rect x="3" y="7.5" width="12" height="9" rx="1.5" fill="#FAF8F4"/>
+        <rect x="6.5" y="11" width="5" height="5.5" rx="1" fill="#2E5439"/>
+        <path d="M 7 13.5 L 8.5 15.5 L 11.5 11.5" stroke="#C17B2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <span class="nav-name">DwellBook</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#support">Support</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">DwellBook · Support Centre</div>
+  <h1>We're here to help.</h1>
+  <p>Everything you need to get the most out of DwellBook — your home's complete private record.</p>
+  <a href="mailto:thedollardetail@gmail.com" class="hero-email">
+    ✉ thedollardetail@gmail.com
+  </a>
+</div>
+
+<!-- SUPPORT -->
+<div class="container">
+
+  <div class="section" id="support">
+    <div class="section-label">Getting started</div>
+    <h2>Using DwellBook</h2>
+    <p>DwellBook stores everything on your iPhone and syncs privately through your own iCloud account. There are no accounts to create, no passwords to remember, and no data ever stored on our servers.</p>
+    <p>To get started, simply download the app, tap <strong>"Add your first task"</strong>, and begin building your home's record. We recommend starting with the pre-loaded task library — it covers the most common home maintenance jobs with suggested intervals already set.</p>
+    <p>The one-time purchase unlocks unlimited tasks, widgets, and partner sharing. To restore a purchase on a new device, tap <strong>Settings → Restore Purchase</strong> inside the app while signed into the same Apple ID you used originally.</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section" id="faq">
+    <div class="section-label">Frequently asked questions</div>
+    <h2>Common questions</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          How do I share my home with my partner?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          DwellBook uses iCloud to share your home privately between two Apple devices. Go to <strong>Settings → Share with partner</strong> inside the app and follow the on-screen instructions. Both of you need to be on the same iCloud Family Sharing account. Once set up, any task either person logs is visible to both instantly — no manual syncing needed.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Will my data survive if I delete and reinstall the app?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Yes. All your data is stored in your iCloud account, not on your device storage. When you reinstall DwellBook and sign in with the same Apple ID, everything reappears automatically — tasks, contractors, paint colours, photos, and warranties. Make sure iCloud is enabled for DwellBook in your iPhone Settings → [Your Name] → iCloud.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          How do I restore my one-time purchase on a new phone?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Open DwellBook on your new phone, go to <strong>Settings → Restore Purchase</strong>, and tap Restore. Make sure you're signed into the same Apple ID you used when you originally purchased. Apple handles all purchase records — as long as you're on the same Apple ID, the restore is free and instant. You will never be charged twice.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Can I use DwellBook on my iPad and Mac too?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Yes. DwellBook works on iPhone, iPad, and Mac (Apple Silicon). Download it from the App Store on each device using the same Apple ID. Your data syncs automatically between all your devices through iCloud. The one-time purchase covers all your Apple devices — you only pay once.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          How do I add the home screen widget?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Long-press any empty area on your iPhone home screen until the icons start jiggling, then tap the <strong>+</strong> button in the top-left corner. Search for <strong>DwellBook</strong> and choose your preferred widget size. The widget shows your next due task and updates automatically — no need to open the app.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          How do I export my data?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Go to <strong>Settings → Export data</strong> inside DwellBook. You can export a full CSV of your task history, contractor list, and warranty records. The export goes directly to your Files app and can be AirDropped, emailed, or saved anywhere you like. Your data is always yours — we never lock you in.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          My notifications aren't appearing — what do I do?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Go to your iPhone <strong>Settings → Notifications → DwellBook</strong> and make sure "Allow Notifications" is turned on. DwellBook's reminders are scheduled locally on your device — they don't require internet — but they do require notification permission. If you recently reinstalled the app, iOS may have reset the permission and you'll need to grant it again.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          How do I generate a home history report for a house sale?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a">
+          Go to <strong>Settings → Export → House sale report</strong>. DwellBook generates a clean PDF of your complete maintenance history — every task, contractor, date, and cost — formatted clearly for sharing with a buyer or estate agent. It's one of the most powerful things you can hand over when selling your home.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <div class="section-label">Get in touch</div>
+    <h2>Contact support</h2>
+    <p>Can't find the answer above? We respond to every message, usually within one business day.</p>
+
+    <div class="contact-card">
+      <div class="contact-icon">✉</div>
+      <div>
+        <h3>Email support</h3>
+        <p>Send us a message and include your iOS version, iPhone model, and a brief description of the issue. The more detail you include, the faster we can help.</p>
+        <a href="mailto:thedollardetail@gmail.com" class="contact-email-link">thedollardetail@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIVACY -->
+  <div class="section" id="privacy">
+    <div class="section-label">Legal</div>
+    <h2>Privacy Policy</h2>
+    <p style="color:var(--ink-light); font-size:13px;">Last updated: April 2026</p>
+
+    <div class="privacy-block">
+
+      <div class="privacy-highlight">
+        The short version: DwellBook does not collect, store, or transmit your personal data. Your home's records live on your device and in your own iCloud account. We never see them.
+      </div>
+
+      <h3>Who we are</h3>
+      <p>DwellBook is an iOS application for home maintenance tracking. References to "we," "us," or "DwellBook" in this policy refer to the developer of the DwellBook application.</p>
+
+      <h3>What data we collect</h3>
+      <p>We collect no personal data. DwellBook does not require an account, does not have a login, and does not transmit any user-generated content to our servers — because we have no servers.</p>
+      <p>All data you enter into DwellBook — tasks, contractors, paint colours, photos, warranty records, measurements — is stored exclusively:</p>
+      <ul>
+        <li>On your iPhone, iPad, or Mac local storage</li>
+        <li>In your personal iCloud account, if iCloud sync is enabled</li>
+      </ul>
+      <p>We have no access to this data. It is governed entirely by Apple's iCloud terms of service and privacy policy.</p>
+
+      <h3>Analytics and crash reporting</h3>
+      <p>DwellBook may use Apple's optional, anonymised crash reporting through Xcode's crash log system. This data is collected by Apple, not by us, and contains no personally identifiable information. It is used solely to identify and fix bugs. You can opt out of this by turning off "Share with App Developers" in your iPhone Settings → Privacy & Security → Analytics & Improvements.</p>
+
+      <h3>Purchases</h3>
+      <p>DwellBook's one-time purchase is processed entirely by Apple through the App Store. We never receive, store, or process your payment information. Apple's purchase privacy policy governs all transaction data.</p>
+
+      <h3>Third-party services</h3>
+      <p>DwellBook does not integrate with any third-party analytics, advertising, or tracking services. We use no SDKs that collect data. There are no ads in DwellBook and there never will be.</p>
+
+      <h3>Children's privacy</h3>
+      <p>DwellBook is designed for homeowners and is not directed at children under 13. We do not knowingly collect any data from children.</p>
+
+      <h3>Data retention</h3>
+      <p>Because we collect no data, there is nothing for us to retain or delete. Your data exists only in your iCloud account and on your devices. You can delete it at any time by deleting the app or clearing your iCloud storage.</p>
+
+      <h3>Your rights</h3>
+      <p>Under GDPR, CCPA, and other applicable privacy laws, you have the right to access, correct, and delete your personal data. Since your data lives entirely in your own iCloud account, you exercise these rights directly through Apple's iCloud controls — not through us.</p>
+
+      <h3>Changes to this policy</h3>
+      <p>If we make material changes to this privacy policy, we will update the date at the top of this page and note the change in the next DwellBook app update. We will never introduce data collection practices that contradict this policy without clear prior notice.</p>
+
+      <h3>Contact</h3>
+      <p>If you have any questions about this privacy policy, please contact us at <a href="mailto:thedollardetail@gmail.com" style="color:var(--green);">thedollardetail@gmail.com</a>.</p>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">DwellBook</div>
+  <div class="footer-meta">
+    Your home's memory — private, offline, yours.<br>
+    <a href="#privacy">Privacy Policy</a> ·
+    <a href="#faq">FAQ</a> ·
+    <a href="/cdn
